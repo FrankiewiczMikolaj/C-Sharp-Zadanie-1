@@ -7,10 +7,14 @@ namespace Zadanie_1
     {
         static void Main(string[] args)
         {
+            //Zmienne prostokąty
             string input;
             int height = 0;
             int width = 0;
             bool type;
+            //Zmienne maszyna losująca
+            Random maszyna = new Random();
+
             void menu()
             {
             Console.Clear();
@@ -35,7 +39,7 @@ namespace Zadanie_1
                         break;
                     case "2":
                         Console.Clear();
-                        Console.WriteLine($"{input} twoja cyfra");
+                        losowanie();
                         break;
                     default:
                         Console.Clear();
@@ -144,6 +148,38 @@ namespace Zadanie_1
                     Console.WriteLine("");
 
                 }
+                Console.WriteLine("Aby wrocic do menu nacisnij dowolny pzycisk.");
+                Console.ReadKey();
+                menu();
+            }
+
+            void losowanie()
+            {
+                Console.Clear();
+                Console.WriteLine("----------------");
+                Console.WriteLine("Maszyna losujaca");
+                Console.WriteLine("----------------");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Maszyna wylosowała jedna liczbe z przedzialu od 0 do 100. Aby wygrac musisz zgadnac co to za liczba.");
+                Console.ForegroundColor = ConsoleColor.White;
+                int liczba = maszyna.Next(0, 100);
+                int data = 0;
+                //Console.WriteLine($"{liczba}");
+                while (data != liczba)
+                {
+                        Console.Write("Wpisz swoja odpowiedz: ");
+                        input = Console.ReadLine();
+                    if (!int.TryParse(input, out data))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("To musi byc liczba!");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        continue;
+                    }
+                 };
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Gratulacje udalo Ci sie odgadnac!");
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Aby wrocic do menu nacisnij dowolny pzycisk.");
                 Console.ReadKey();
                 menu();
